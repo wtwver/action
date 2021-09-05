@@ -10,5 +10,5 @@ jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
-      - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }} ${{ secrets.DOMAIN }}
+      - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
       - run: docker run wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
