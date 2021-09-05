@@ -10,4 +10,4 @@ jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
-      - run: docker run alpine ls
+      - run: docker run --rm -it projectdiscovery/nuclei -u ${{ secrets.TARGET }}
