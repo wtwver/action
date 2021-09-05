@@ -11,3 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: docker run projectdiscovery/nuclei -u ${{ secrets.TARGET }}
+      - run: docker run wtwver/reconftw -d ${{ secrets.TARGET }} -s
