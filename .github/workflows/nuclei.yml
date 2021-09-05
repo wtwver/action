@@ -10,9 +10,4 @@ jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Nuclei - DAST Scan
-        uses: projectdiscovery/nuclei-action@main
-        with:
-          target: https://testfire.net
+      run: docker run alpine ls
