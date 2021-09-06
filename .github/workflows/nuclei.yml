@@ -12,4 +12,4 @@ jobs:
     steps:
       - run: free -m
       - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
-      - run: docker run -m 1g wtwver/reconftw -d ${{ secrets.DOMAIN }} -a
+      - run: docker run -m 6g wtwver/reconftw -d ${{ secrets.DOMAIN }} -a
