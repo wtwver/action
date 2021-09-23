@@ -10,5 +10,6 @@ jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
+      - run: curl ifconfig.me
       - run: docker run projectdiscovery/nuclei -u https://testfire.net
       - run: docker run projectdiscovery/nuclei -u https://preview.owasp-juice.shop
