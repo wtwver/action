@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: free -m
+      - uses: actions/checkout@v2
       - run: ls -R
       # - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
       # - run: docker run -m 4g wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
