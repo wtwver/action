@@ -16,5 +16,4 @@ jobs:
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/notify.conf?token=AM2642AYJLAB7BRNM25DFDTBLAAUE -o notify.conf
       - run: ls -R
       # - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
-      # - run: docker run -m 4g wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
-      
+      - run: docker run -m 5g -v ${PWD}/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
