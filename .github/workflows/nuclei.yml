@@ -17,5 +17,5 @@ jobs:
       - run: ls -R
       # - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
       # - run: docker run -m 5g -v ${PWD}/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
-      - run: cat ${PWD}/atm/config/notify.conf
-      - run: docker run -m 5g -v -v ${PWD}/atm/config/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/atm/config/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d testfire.net -s
+      - run: cat ${PWD}/notify.conf
+      - run: docker run -m 5g -v -v ${PWD}/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d testfire.net -s
