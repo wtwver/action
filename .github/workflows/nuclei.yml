@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: free -m
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
-      # - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
-      # - run: docker run -m 5g -v ${PWD}/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
       - run: cat ${PWD}/provider-config.yaml
-      - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d testfire.net -s
+      - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
