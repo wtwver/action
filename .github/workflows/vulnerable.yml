@@ -18,8 +18,11 @@ jobs:
     env:
       TARGET: ${{ github.event.inputs.target }}
     steps:
-      - run: echo "::add-mask::$TARGET"
-      - name: lol
-        run: echo ${{ github.event.inputs.target }} && curl ifconfig.me
-      - run: docker run projectdiscovery/nuclei -u https://testfire.net
-      - run: docker run projectdiscovery/nuclei -u https://preview.owasp-juice.shop
+      # - run: echo "::add-mask::$TARGET"
+      - run: curl ifconfig.me
+      - name: input
+        run: docker run projectdiscovery/nuclei -u https://$TARGET
+      - name: site1
+        run: docker run projectdiscovery/nuclei -u https://testfire.net
+      - name: site2
+        run: docker run projectdiscovery/nuclei -u https://preview.owasp-juice.shop
