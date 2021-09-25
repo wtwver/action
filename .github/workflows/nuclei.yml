@@ -6,10 +6,17 @@ on:
     # workflow_dispatch
     push:
       - dev
+    workflow_dispatch:
+      inputs:
+          target:
+            required: false
+            default: 'testfire.net'
 
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    env:
+      TARGET: ${{ github.event.inputs.target }}
     steps:
       - run: free -m
       # - uses: actions/checkout@v2
@@ -17,5 +24,6 @@ jobs:
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
       - run: cat ${PWD}/provider-config.yaml
-      - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
-            # - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
+      - name: subdomain
+        run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d $TARGET -s
+      
