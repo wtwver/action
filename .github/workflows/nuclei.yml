@@ -16,5 +16,5 @@ jobs:
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
       - run: cat ${PWD}/provider-config.yaml
-      - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d testfire.net -s
+      - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
             # - run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
