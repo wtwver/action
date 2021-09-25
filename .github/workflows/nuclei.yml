@@ -12,8 +12,8 @@ jobs:
     steps:
       - run: free -m
       - uses: actions/checkout@v2
-      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -o reconftw.bbrf
-      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/notify.conf?token=AM2642AYJLAB7BRNM25DFDTBLAAUE -o notify.conf
+      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
+      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/notify.conf?token=AM2642AYJLAB7BRNM25DFDTBLAAUE -O notify.conf
       - run: ls -R
       # - run: docker run projectdiscovery/nuclei -u ${{ secrets.HTTP }}://${{ secrets.DOMAIN }}
       - run: docker run -m 5g -v ${PWD}/notify.conf:/root/Tools/reconftw/notify.conf -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d ${{ secrets.DOMAIN }} -s
