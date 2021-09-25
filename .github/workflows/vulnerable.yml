@@ -15,8 +15,10 @@ on:
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    env:
+      TARGET: ${{ github.event.inputs.target }}
     steps:
-      - run: target=${{ github.event.inputs.target }} && echo "::add-mask::$target"
+      - run: echo "::add-mask::$TARGET"
       - run: echo ${{ github.event.inputs.target }} && curl ifconfig.me
       - run: docker run projectdiscovery/nuclei -u https://testfire.net
       - run: docker run projectdiscovery/nuclei -u https://preview.owasp-juice.shop
