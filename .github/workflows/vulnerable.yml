@@ -16,6 +16,6 @@ jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.inputs.name }} && curl ifconfig.me
+      - run: echo ${{ github.event.inputs.target }} && curl ifconfig.me
       - run: docker run projectdiscovery/nuclei -u https://testfire.net
       - run: docker run projectdiscovery/nuclei -u https://preview.owasp-juice.shop
