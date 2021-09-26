@@ -23,10 +23,13 @@ jobs:
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
       - run: cat ${PWD}/provider-config.yaml
-      
+
       - name: start service
         run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
       
       - name: subdomain
         run: docker exec reconftw ./reconftw.sh -d $TARGET -s
+
+      - name: subdomain
+        run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 curl
       
