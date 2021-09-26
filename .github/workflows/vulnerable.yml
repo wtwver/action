@@ -30,8 +30,8 @@ jobs:
       - name: automated-pentest
         run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d $TARGET       
 
-      - name: automated-pentest https
-        run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d https://$TARGET    
+#       - name: automated-pentest https
+#         run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d https://$TARGET    
       # - name: site1
       #   run: docker run projectdiscovery/nuclei -u https://testfire.net
       # - name: site2
