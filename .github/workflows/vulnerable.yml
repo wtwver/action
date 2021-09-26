@@ -24,7 +24,7 @@ jobs:
         run: docker run projectdiscovery/nuclei -u https://$TARGET
 
       - name: jaeles
-        run: docker run --entrypoint "" wtwver/jaeles -jaeles config init -y && jaeles scan -s '/root/.jaeles/base-signatures' -u https://$TARGET
+        run: docker run --entrypoint sh wtwver/jaeles -c "jaeles config init -y && jaeles scan -s '/root/.jaeles/base-signatures' -u https://$TARGET"
 
       - name: automated-pentest
         run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d $TARGET       
