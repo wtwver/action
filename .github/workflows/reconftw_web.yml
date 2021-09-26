@@ -31,5 +31,7 @@ jobs:
         run: docker exec reconftw ./reconftw.sh -d $TARGET -s
 
       - name: subdomain
-        run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 curl
+        run: docker exec reconftw ./reconftw.sh -d $TARGET -a
+      # - name: curl
+      #   run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl 
       

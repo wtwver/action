@@ -23,6 +23,13 @@ jobs:
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
       - run: cat ${PWD}/provider-config.yaml
+
+      - name: start service
+        run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
+      
       - name: subdomain
-        run: docker run -m 5g -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg wtwver/reconftw -d $TARGET -s
+        run: docker exec reconftw ./reconftw.sh -d $TARGET -s
+        # -H "Accept: application/vnd.github.v3+json" 
+      - name: curl
+        run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl -X POST https://api.github.com/repos/wtwver/nuclei/actions/workflows/reconftw_web.yml/dispatches -u wtwver:${{ secrets.GITHUBTOKEN }} -d '{"ref":"main" , "inputs":{"target":"{}"}}' 
       
