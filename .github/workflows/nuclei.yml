@@ -1,4 +1,4 @@
-name: Scan Target
+name: reconftw
 
 on:
    # schedule:

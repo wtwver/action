@@ -1,4 +1,4 @@
-name: Scan Target
+name: reconftw_trigger
 
 on:
    # schedule:
