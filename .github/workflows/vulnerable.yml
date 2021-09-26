@@ -15,6 +15,7 @@ on:
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       TARGET: ${{ github.event.inputs.target }}
     steps:
