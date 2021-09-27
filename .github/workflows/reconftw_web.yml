@@ -26,7 +26,7 @@ jobs:
 
       - name: start service
         run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
-      
+      - run : docker exec reconftw rm ../../.bbrf/config.json && docker exec reconftw ./install.sh
       - name: subdomain
         run: docker exec reconftw ./reconftw.sh -d $TARGET -s
 
