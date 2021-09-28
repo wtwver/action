@@ -35,5 +35,8 @@ jobs:
         # -H "Accept: application/vnd.github.v3+json" 
       - name: curl
         run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl -X POST https://api.github.com/repos/wtwver/nuclei/actions/workflows/reconftw_web.yml/dispatches -u wtwver:${{ secrets.GITHUBTOKEN }} -d '{"ref":"main" , "inputs":{"target":"{}"}}' 
+
+      - name: remove data to prevent bugs
+        run: docker exec reconftw rm -rf Recon/$TARGET
       - name: all
         run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
