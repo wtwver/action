@@ -36,7 +36,7 @@ jobs:
       # - name: curl
       #   run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl -X POST https://api.github.com/repos/wtwver/nuclei/actions/workflows/reconftw_web.yml/dispatches -u wtwver:${{ secrets.GITHUBTOKEN }} -d '{"ref":"main" , "inputs":{"target":"{}"}}' 
 
-      - run:　docker exec reconftw bash -c "cat Recon/$TARGET／subdomains/subdomains.txt webs/webs.txt 2>/dev/null | nuclei -silent -t ~/nuclei-templates/"
+      - run:　docker exec reconftw bash -c "cat Recon/$TARGET／subdomains/subdomains.txt webs/webs.txt 2>/dev/null \| nuclei -silent -t ~/nuclei-templates/"
 
       - name: remove data to prevent bugs
         run: docker exec reconftw rm -rf Recon/$TARGET
