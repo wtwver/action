@@ -1,0 +1,29 @@
+name: sqlilab
+
+on:
+    schedule:
+      - cron: '0 0 * * *'
+    # push:
+    workflow_dispatch:
+      # inputs:
+      #     target:
+      #       required: false
+      #       default: 'testfire.net'
+
+
+jobs:
+  nuclei-scan:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      TARGET: ${{ github.event.inputs.target }}
+    steps:
+      # - run: echo "::add-mask::$TARGET"
+      - run: curl ifconfig.me
+      
+      - run : docker run -d -p 80:80 acgpiano/sqli-labs:latest
+      - run: curl localhost:80
+      - run: docker run wtwver/sqlmap localhost:80
+      - name: nuclei
+        run: docker run projectdiscovery/nuclei -u http://localhost:80
+
