@@ -21,16 +21,11 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me && ip a
       
-      #- run: git clone --depth 1 https://github.com/c0ny1/vulstudy
-      #- run: cd vulstudy && docker-compose up -d && docker-compose ps
       - run: docker network create test1
-      - run: docker run --name lab --net test1 -e 80 acgpiano/sqli-labs &
+      - run: docker run --name lab --net test1 -p 1000:80 acgpiano/sqli-labs &
       - run: sudo netstat -tulpn | grep LISTEN 
 
-      #- run: docker run --net vulstudy_default wtwver/sqlmap http://vulstudy_sqli-labs_1 --crawl 3
       - run: docker run --net test1 wtwver/sqlmap http://lab --crawl 3
 
       - run: curl 172.17.0.1:1000 -I 
       - run: curl localhost:1000 -I 
-      # - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:1000
-
