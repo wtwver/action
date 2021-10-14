@@ -22,32 +22,7 @@ jobs:
       - run: curl ifconfig.me
       
       - run: docker run -p 8765:80 acgpiano/sqli-labs &
-      - run: curl localhost:8765 -I --ipv4
+      - run: curl 172.18.0.1:8765 -I 
       
-      - run: docker run wtwver/sqlmap http://localhost:8765
-      - run: docker run projectdiscovery/nuclei -u http://localhost:8765
-
-  docker:
-    name: Build and run
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with: 
-          repository: canonical-web-and-design/vanilla-framework
-      - name: Build Docker image
-        run: DOCKER_BUILDKIT=1 docker build --build-arg BUILD_ID=test --tag testrun .
-      - name: Run server with Docker
-        run: docker run -p 8765:80 --env SECRET_KEY=insecure_test_key testrun &
-      - name: Check server status
-        run: curl localhost:8765/_status/check -I
-      
-      - run: docker run -p 8770:80 bkimminich/juice-shop &
-      - run: docker run -p 8771:80 acgpiano/sqli-labs &
-      - run: docker run -p 8772:80 vulnerables/web-dvwa &
-      - run: docker run -p 8773:8080 owaspvwad/wavsep &
-      - run: docker run -p 8774:80 andresriancho/wivet &
-      - run: sudo netstat -tulpn | grep LISTEN
-      - run: curl 127.0.0.1:8770 -I
-      - run: curl 0.0.0.0:8770 -I
-      - run: curl localhost:8770 -I
-      
+      - run: docker run wtwver/sqlmap http://172.18.0.1:8765
+      - run: docker run projectdiscovery/nuclei -u http://172.18.0.1:8765
