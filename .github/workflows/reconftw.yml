@@ -28,7 +28,9 @@ jobs:
           path: atm
 
       - run: ls -R
-      - run: cat ${PWD}/config/provider-config.yaml
+      - run: cat ${PWD}/atm/config/provider-config.yaml
+      - run: cp atm/config/provider-config.yaml provider-config.yaml
+      - run: cp atm/config/reconftw.bbrf reconftw.bbrf
 
       - name: start service
         run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
