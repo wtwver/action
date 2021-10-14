@@ -40,10 +40,11 @@ jobs:
         run: docker run -p 8765:80 --env SECRET_KEY=insecure_test_key testrun &
       - name: Check server status
         run: curl localhost:8765/_status/check -I
-      - name: Run server with Docker
-        run: docker run -p 8766:80 bkimminich/juice-shop &
-      - name: Check server status
-        run: curl localhost:8766/_status/check -I
+      
+      - run: docker run -p 8766:80 bkimminich/juice-shop &
+      - run: netstat -tulpn | grep LISTEN
+      - run: curl localhost:8766/_status/check -I
+      
       - name: Install linkchecker
         run: sudo pip install LinkChecker
       - name: Check internal links
