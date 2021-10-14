@@ -31,10 +31,10 @@ jobs:
       - run: docker exec vulstudy_sqli-labs_1 curl localhost
 
       - run: docker exec vulstudy_sqli-labs_1 ip a
-      # - run: curl ip
-      # - run: curl 0.0.0.0:83
+
       - run: docker run wtwver/sqlmap http://172.18.0.6
       - run: docker run wtwver/sqlmap http://0.0.0.0:83
+      - run: curl 172.18.0.6
 
       - name: nuclei
         run: docker run projectdiscovery/nuclei -u http://0.0.0.0:83
