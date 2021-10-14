@@ -22,7 +22,7 @@ jobs:
       - run: curl ifconfig.me
       
       - run : docker run -p 2000:80 acgpiano/sqli-labs &
-      - run: curl localhost:2000 -I
+      - run: curl localhost:2000 -I --ipv4
       
       - run: docker run wtwver/sqlmap http://localhost:2000
       - run: docker run projectdiscovery/nuclei -u http://localhost:2000
