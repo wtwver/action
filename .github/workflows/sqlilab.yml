@@ -19,7 +19,7 @@ jobs:
       TARGET: ${{ github.event.inputs.target }}
     steps:
       # - run: echo "::add-mask::$TARGET"
-      - run: curl ifconfig.me
+      - run: curl ifconfig.me && ip a
       
       - run: docker run -p 8765:80 acgpiano/sqli-labs &
       - run: curl 172.18.0.1:8765 -I 
