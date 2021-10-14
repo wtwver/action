@@ -21,7 +21,10 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me
       
-      - run: git clone --depth 1 https://github.com/wtwver/atm 
+      - uses: actions/checkout@main
+        with:
+          name: wtwver/atm     
+          # ref: refs/heads/release
 
       - run : docker run -p 80:80 acgpiano/sqli-labs:latest
       - run: curl localhost:80
