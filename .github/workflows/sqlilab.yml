@@ -1,4 +1,4 @@
-name: sqlilab
+name: sqlilab-sqlmap
 
 on:
     schedule:
@@ -23,7 +23,7 @@ jobs:
       
       - run : docker run -d -p 80:80 acgpiano/sqli-labs:latest
       - run: curl localhost:80
-      - run: docker run wtwver/sqlmap localhost:80
+      - run: docker run wtwver/sqlmap http://localhost
       - name: nuclei
-        run: docker run projectdiscovery/nuclei -u http://localhost:80
+        run: docker run projectdiscovery/nuclei -u http://localhost
 
