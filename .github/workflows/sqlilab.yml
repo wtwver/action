@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@main
         with:
           repository: wtwver/atm     
-          # ref: refs/heads/release
+          token: ${{ secrets.GITHUBTOKEN }}
 
       - run : docker run -p 80:80 acgpiano/sqli-labs:latest
       - run: curl localhost:80
