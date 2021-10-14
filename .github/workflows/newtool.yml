@@ -26,7 +26,7 @@ jobs:
       - run: docker ps 
       - run: sudo netstat -tulpn | grep LISTEN
 
-      - run: docker exec vulstudy_sqli-labs_1 apk add curl
+      - run: docker exec vulstudy_sqli-labs_1 sh apk add curl
       - run: docker exec vulstudy_sqli-labs_1 curl localhost
 
       - run: docker exec vulstudy_sqli-labs_1 ip a
