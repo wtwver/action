@@ -23,6 +23,7 @@ jobs:
       
       - run: docker network create test1
       - run: docker run --name lab --net test1 -p 1000:80 -d acgpiano/sqli-labs 
+      - run: docker exec lab apt-get install -y curl
       - run: docker exec lab curl http://localhost/sql-connections/setup-db.php
 
       - run: sudo netstat -tulpn | grep LISTEN 
