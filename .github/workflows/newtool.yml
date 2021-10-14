@@ -28,7 +28,7 @@ jobs:
       - run: docker exec vulstudy_sqli-labs_1 apt-get update && docker exec vulstudy_sqli-labs_1 apt-get install -y curl && docker exec vulstudy_sqli-labs_1 curl localhost
 
       - run: docker run --net vulstudy_default wtwver/sqlmap http://vulstudy_sqli-labs_1
-      - run: docker run vulstudywtwver/sqlmap http://172.18.0.1:83
+      - run: docker run wtwver/sqlmap http://172.18.0.1:83
 
       - name: nuclei
         run: docker run projectdiscovery/nuclei -u http://172.18.0.1:83
