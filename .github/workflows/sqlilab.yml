@@ -22,7 +22,8 @@ jobs:
       - run: curl ifconfig.me && ip a
       
       - run: docker run -p 8888:80 acgpiano/sqli-labs &
-      #- run: curl 172.17.0.1:8888 -I 
-      
+      - run: curl 172.17.0.1:8888 -I 
+      - run: curl localhost:8888 -I 
+
       - run: docker run wtwver/sqlmap http://172.17.0.1:8888
       - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:8888
