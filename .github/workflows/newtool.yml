@@ -29,10 +29,14 @@ jobs:
 
       - run: docker run --net vulstudy_default vulstudywtwver/sqlmap http://vulstudy_sqli-labs_1
       - run: docker run vulstudywtwver/sqlmap http://172.18.0.1:83
-      - run: curl 172.18.0.1:83
 
       - name: nuclei
         run: docker run projectdiscovery/nuclei -u http://172.18.0.1:83
+
+      - run: curl 172.18.0.1:83
+      - run: curl 0.0.0.0:83
+      - run: curl 127.0.0.1:83
+      - run: curl localhost:83
 
       #- name: jaeles
       #  run: docker run --entrypoint sh wtwver/jaeles -c "jaeles config init -y && jaeles scan -s '/root/.jaeles/base-signatures' -u https://$TARGET"
