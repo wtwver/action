@@ -21,7 +21,7 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me
       
-      - run : docker run -p 8765:80 acgpiano/sqli-labs &
+      - run: docker run -p 8765:80 acgpiano/sqli-labs &
       - run: curl localhost:8765 -I --ipv4
       
       - run: docker run wtwver/sqlmap http://localhost:8765
