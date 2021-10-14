@@ -25,7 +25,7 @@ jobs:
       - run: cd vulstudy && docker-compose up -d && docker-compose ps
       - run: docker ps && sudo netstat -tulpn | grep LISTEN
 
-      - run: docker exec vulstudy_sqli-labs_1 apt-get update && apt-get install -y curl && curl localhost
+      - run: docker exec vulstudy_sqli-labs_1 apt-get update && docker exec vulstudy_sqli-labs_1 apt-get install -y curl && docker exec vulstudy_sqli-labs_1 curl localhost
 
       - run: docker run wtwver/sqlmap http://172.18.0.1:83
       - run: curl 172.18.0.1:83
