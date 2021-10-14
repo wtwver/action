@@ -46,7 +46,7 @@ jobs:
       - run: docker run -p 8772:80 vulnerables/web-dvwa &
       - run: docker run -p 8773:8080 owaspvwad/wavsep &
       - run: docker run -p 8774:80 -it andresriancho/wivet &
-      - run: netstat -tulpn | grep LISTEN
+      - run: sudo netstat -tulpn | grep LISTEN
       - run: curl 127.0.0.1:8770 -I
       - run: curl 0.0.0.0:8770 -I
       - run: curl localhost:8770 -I
