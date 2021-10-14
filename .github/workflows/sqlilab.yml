@@ -23,11 +23,10 @@ jobs:
       
       - uses: actions/checkout@main
         with:
-          name: wtwver/atm     
+          repository: wtwver/atm     
           # ref: refs/heads/release
-      - run : ls -R
 
-      - run : docker run -d -p 80:80 acgpiano/sqli-labs:latest
+      - run : docker run -p 80:80 acgpiano/sqli-labs:latest
       - run: curl localhost:80
       - run: docker run wtwver/sqlmap http://localhost
       - name: nuclei
