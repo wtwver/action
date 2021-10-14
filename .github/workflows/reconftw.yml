@@ -26,9 +26,9 @@ jobs:
           repository: wtwver/atm     
           token: ${{ secrets.GITHUBTOKEN }}
           path: atm
-          
+
       - run: ls -R
-      - run: cat ${PWD}/provider-config.yaml
+      - run: cat ${PWD}/config/provider-config.yaml
 
       - name: start service
         run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
