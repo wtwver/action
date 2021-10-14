@@ -3,7 +3,7 @@ name: sqlilab-sqlmap
 on:
     schedule:
       - cron: '0 0 * * *'
-    # push:
+    push:
     workflow_dispatch:
       # inputs:
       #     target:
