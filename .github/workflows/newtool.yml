@@ -22,8 +22,8 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me
       - run: git clone --depth 1 https://github.com/c0ny1/vulstudy
-      - run: cd vulstudy && docker-compose up -d
-      - run: docker ps && docker-compose ps && sudo netstat -tulpn | grep LISTEN
+      - run: cd vulstudy && docker-compose up -d && docker-compose ps
+      - run: docker ps && sudo netstat -tulpn | grep LISTEN
 
       - run: docker exec vulstudy_sqli-labs_1 apt-get update && apt-get install -y curl && curl localhost
 
