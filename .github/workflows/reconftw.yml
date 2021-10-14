@@ -19,8 +19,14 @@ jobs:
     steps:
       - run: free -m && df -h .
       # - uses: actions/checkout@v2
-      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
-      - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
+      #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
+      #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
+      - uses: actions/checkout@main
+        with:
+          repository: wtwver/atm     
+          token: ${{ secrets.GITHUBTOKEN }}
+          path: atm
+          
       - run: ls -R
       - run: cat ${PWD}/provider-config.yaml
 
