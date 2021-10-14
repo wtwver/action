@@ -25,7 +25,8 @@ jobs:
       - run: cd vulstudy && docker-compose up -d
       - run: docker ps 
       - run: sudo netstat -tulpn | grep LISTEN
-
+      
+      - run: docker exec vulstudy_sqli-labs_1 apt-get update
       - run: docker exec vulstudy_sqli-labs_1 apt-get install -y curl
       - run: docker exec vulstudy_sqli-labs_1 curl localhost
 
