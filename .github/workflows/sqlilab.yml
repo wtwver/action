@@ -41,11 +41,13 @@ jobs:
       - name: Check server status
         run: curl localhost:8765/_status/check -I
       
-      - run: docker run -p 8766:80 bkimminich/juice-shop &
+      - run: docker run -p 8770:80 bkimminich/juice-shop &
+      - run: docker run -p 8771:80 acgpiano/sqli-labs &
+      - run: docker run -p 8772:80 vulnerables/web-dvwa &
+      - run: docker run -p 8773:8080 owaspvwad/wavsep &
+      - run: docker run -p 8774:80 -it andresriancho/wivet &
       - run: netstat -tulpn | grep LISTEN
-      - run: curl localhost:8766/_status/check -I
+      - run: curl 127.0.0.1:8770 -I
+      - run: curl 0.0.0.0:8770 -I
+      - run: curl localhost:8770 -I
       
-      - name: Install linkchecker
-        run: sudo pip install LinkChecker
-      - name: Check internal links
-        run: linkchecker --ignore-url /search http://localhost:8765
