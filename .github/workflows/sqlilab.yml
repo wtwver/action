@@ -28,7 +28,7 @@ jobs:
 
       - run: sudo netstat -tulpn | grep LISTEN 
 
-      - run: docker run --net test1 wtwver/sqlmap http://lab --crawl 3
-
+      - run: docker run --net test1 wtwver/sqlmap http://lab/Less-1/?id=1 --risk 3 --level 5
+      - run: docker run --net test1 wtwver/sqlmap http://lab/Less-50/?id=1 --risk 3 --level 5
       - run: curl 172.17.0.1:1000 -I 
       - run: curl localhost:1000 -I 
