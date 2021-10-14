@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  nuclei-scan:
+  sqlmap:
     runs-on: ubuntu-latest
     continue-on-error: true
     env:
@@ -27,3 +27,8 @@ jobs:
       - run: docker run wtwver/sqlmap http://localhost:2000
       - run: docker run projectdiscovery/nuclei -u http://localhost:2000
 
+  test2:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: tail -f /dev/null
