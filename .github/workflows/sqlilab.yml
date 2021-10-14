@@ -27,8 +27,20 @@ jobs:
       - run: docker run wtwver/sqlmap http://localhost:8765
       - run: docker run projectdiscovery/nuclei -u http://localhost:8765
 
-  test2:
+  docker:
+    name: Build and run
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
-      - run: tail -f /dev/null
+      - uses: actions/checkout@v2
+        with: 
+          repository: canonical-web-and-design/vanilla-framework
+      - name: Build Docker image
+        run: DOCKER_BUILDKIT=1 docker build --build-arg BUILD_ID=test --tag testrun .
+      - name: Run server with Docker
+        run: docker run -p ${PORT}:80 --env SECRET_KEY=${SECRET_KEY} testrun &
+      - name: Check server status
+        run: curl localhost:${PORT}/_status/check -I
+      - name: Install linkchecker
+        run: sudo pip install LinkChecker
+      - name: Check internal links
+        run: linkchecker --ignore-url /search http://localhost:${PORT}
