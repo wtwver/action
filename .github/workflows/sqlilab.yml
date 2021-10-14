@@ -24,8 +24,11 @@ jobs:
       - run: docker run -p 1000:80 acgpiano/sqli-labs &
       - run: sudo netstat -tulpn | grep LISTEN 
 
-      - run: docker run wtwver/sqlmap http://172.17.0.1:1000 --crawl 3
-      - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:1000
-
       - run: curl 172.17.0.1:1000 -I 
       - run: curl localhost:1000 -I 
+
+      - run: docker run wtwver/sqlmap http://172.17.0.1:1000 --crawl 3
+      - run: docker run --net host wtwver/sqlmap http://172.17.0.1:1000 --crawl 3
+
+      # - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:1000
+
