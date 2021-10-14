@@ -21,9 +21,10 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me && ip a
       
-      - run: docker run -p 8888:80 acgpiano/sqli-labs &
-      - run: curl 172.17.0.1:8888 -I 
-      - run: curl localhost:8888 -I 
+      - run: docker run -p 1000:80 acgpiano/sqli-labs &
+      - run: sudo netstat -tulpn | grep LISTEN 
+      - run: curl 172.17.0.1:1000 -I 
+      - run: curl localhost:1000 -I 
 
-      - run: docker run wtwver/sqlmap http://172.17.0.1:8888
-      - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:8888
+      - run: docker run wtwver/sqlmap http://172.17.0.1:1000 --crawl
+      - run: docker run projectdiscovery/nuclei -u http://172.17.0.1:1000
