@@ -26,6 +26,11 @@ jobs:
       - run: docker ps 
       - run: sudo netstat -tulpn | grep LISTEN
 
+      - run: docker exec vulstudy_sqli-labs_1 apk add curl
+      - run: docker exec vulstudy_sqli-labs_1 curl localhost
+
+      - run: docker exec vulstudy_sqli-labs_1 ip a
+      # - run: curl ip
       # - run: curl 0.0.0.0:83
       - run: docker run wtwver/sqlmap http://0.0.0.0:83
 
