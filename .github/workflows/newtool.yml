@@ -23,28 +23,21 @@ jobs:
       - run: curl ifconfig.me
       - run: git clone --depth 1 https://github.com/c0ny1/vulstudy
       - run: cd vulstudy && docker-compose up -d
-      - run: docker ps 
-      - run: docker-compose ps 
-      - run: sudo netstat -tulpn | grep LISTEN
+      - run: docker ps && docker-compose ps && sudo netstat -tulpn | grep LISTEN
 
-      - run: docker exec vulstudy_sqli-labs_1 apt-get update
-      - run: docker exec vulstudy_sqli-labs_1 apt-get install -y curl
-      - run: docker exec vulstudy_sqli-labs_1 curl localhost
+      - run: docker exec vulstudy_sqli-labs_1 apt-get update && apt-get install -y curl && curl localhost
 
-      - run: docker exec vulstudy_sqli-labs_1 ip a
-
-      - run: docker run wtwver/sqlmap http://172.18.0.6
-      - run: docker run wtwver/sqlmap http://0.0.0.0:83
-      - run: curl 172.18.0.6
+      - run: docker run wtwver/sqlmap http://172.18.0.1:83
+      - run: curl 172.18.0.1:83
 
       - name: nuclei
-        run: docker run projectdiscovery/nuclei -u http://0.0.0.0:83
+        run: docker run projectdiscovery/nuclei -u http://172.18.0.1:83
 
-      - name: jaeles
-        run: docker run --entrypoint sh wtwver/jaeles -c "jaeles config init -y && jaeles scan -s '/root/.jaeles/base-signatures' -u https://$TARGET"
+      #- name: jaeles
+      #  run: docker run --entrypoint sh wtwver/jaeles -c "jaeles config init -y && jaeles scan -s '/root/.jaeles/base-signatures' -u https://$TARGET"
 
-      - name: automated-pentest
-        run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d $TARGET       
+      #- name: automated-pentest
+      #  run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d $TARGET       
 
 #       - name: automated-pentest https
 #         run: docker run --entrypoint "" -v pentest-reports:/src vishnunair/pentest:latest ./pentest.sh -d https://$TARGET    
