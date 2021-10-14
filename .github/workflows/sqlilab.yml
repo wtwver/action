@@ -41,7 +41,7 @@ jobs:
       - name: Check server status
         run: curl localhost:8765/_status/check -I
       - name: Run server with Docker
-        run: docker run -p 8766:80 acgpiano/sqli-labs &
+        run: docker run -p 8766:80 bkimminich/juice-shop &
       - name: Check server status
         run: curl localhost:8766/_status/check -I
       - name: Install linkchecker
