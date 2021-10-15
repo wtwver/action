@@ -20,5 +20,4 @@ jobs:
     steps:
       # - run: echo "::add-mask::$TARGET"
       - run: echo {1..10}
-      - run: echo \{1..10\}
       - run: bash -c "echo {1..10}"
