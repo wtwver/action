@@ -32,7 +32,7 @@ jobs:
 
       - run: docker run --net test1 wtwver/sqlmap http://lab/Less-1/?id=1 --risk 3 --level 5
       - run: for a in {1..65}; do echo $a ; done
-      - run: for a in {1..65}; do docker run --net test1 wtwver/sqlmap http://lab/Less-$a/?id=1 --risk 3 --level 5" ; done
+      - run: for a in {1..65}; do docker run --net test1 wtwver/sqlmap http://lab/Less-$a/?id=1 --risk 3 --level 5 ; done
       - run: curl 172.17.0.1:1000 -I 
       - run: curl localhost:1000 -I 
 
