@@ -21,7 +21,7 @@ jobs:
       # - run: echo "::add-mask::$TARGET"
       - run: curl ifconfig.me && ip a
       - run: curl -s https://install.zerotier.com | sudo bash
-      - run: zerotier-cli join 8286ac0e473ee80d
+      - run: sudo zerotier-cli join 8286ac0e473ee80d
 
       - run: docker network create test1
       - run: docker run --name lab --net test1 -p 1000:80 -d acgpiano/sqli-labs 
