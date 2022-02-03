@@ -22,7 +22,7 @@ jobs:
       #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
       #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - name: getConfig by checkout
-      - uses: actions/checkout@main
+        uses: actions/checkout@main
         with:
           repository: wtwver/atm     
           token: ${{ secrets.GITHUBTOKEN }}
@@ -47,4 +47,4 @@ jobs:
 
       - name: recon all after remove data to prevent bugs
         run: docker exec reconftw rm -rf Recon/$TARGET
-        run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
+      - run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
