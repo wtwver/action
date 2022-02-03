@@ -1,4 +1,4 @@
-name: reconftw_trigger
+name: reconftw-trigger
 
 on:
    # schedule:
@@ -18,7 +18,8 @@ jobs:
       TARGET: ${{ github.event.inputs.target }}
     steps:
       - run: free -m && df -h .
-      # - uses: actions/checkout@v2
+
+      - name: getConfig by raw token
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
       - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
       - run: ls -R
@@ -35,6 +36,7 @@ jobs:
 
       - name:  recon all
         run: docker exec reconftw ./reconftw.sh -d $TARGET -a
-      # - name: curl
+
+      # - name: Recursive
       #   run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl 
       

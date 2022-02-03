@@ -1,4 +1,4 @@
-name: reconftw
+name: reconftw-resurser
 
 on:
    # schedule:
@@ -18,17 +18,15 @@ jobs:
       TARGET: ${{ github.event.inputs.target }}
     steps:
       - run: free -m && df -h .
-      # - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
       #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
       #- run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/provider-config.yaml?token=AM2642DAWFSV2KQZJHNRB33BLAMPA -O provider-config.yaml
+      - name: getConfig by checkout
       - uses: actions/checkout@main
         with:
           repository: wtwver/atm     
           token: ${{ secrets.GITHUBTOKEN }}
           path: atm
-
-      - run: ls -R
-      - run: cat ${PWD}/atm/config/provider-config.yaml
       - run: cp atm/config/provider-config.yaml provider-config.yaml
       - run: cp atm/config/reconftw.bbrf reconftw.bbrf
 
@@ -40,14 +38,13 @@ jobs:
             
       - name: subdomain
         run: docker exec reconftw ./reconftw.sh -d $TARGET -s
-        # -H "Accept: application/vnd.github.v3+json" 
-      # - name: curl
+       
+      # - name: trigger resursion     # -H "Accept: application/vnd.github.v3+json" 
       #   run: docker exec reconftw cat Recon/$TARGET/subdomains/subdomains.txt | xargs  -L 1 -I {} curl -X POST https://api.github.com/repos/wtwver/nuclei/actions/workflows/reconftw_web.yml/dispatches -u wtwver:${{ secrets.GITHUBTOKEN }} -d '{"ref":"main" , "inputs":{"target":"{}"}}' 
 
-      # - run:　|
-      #     docker exec reconftw bash -c "cat Recon/$TARGET／subdomains/subdomains.txt webs/webs.txt 2>/dev/null | nuclei -silent -t ~/nuclei-templates/"
+      # - name: run nuclei after trigger resursion 
+      # - run: docker exec reconftw bash -c "cat Recon/$TARGET／subdomains/subdomains.txt webs/webs.txt 2>/dev/null | nuclei -silent -t ~/nuclei-templates/"
 
-      - name: remove data to prevent bugs
+      - name: recon all after remove data to prevent bugs
         run: docker exec reconftw rm -rf Recon/$TARGET
-      - name: all
         run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
