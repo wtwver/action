@@ -35,9 +35,11 @@ jobs:
   #     # - run: docker exec reconftw sed -i '1686 a curl -T "$SCRIPTPATH/$zip_name" https://f.hoball.tk:81/upload/' reconftw.sh
       # - run: docker exec reconftw go version
 
-      - run: docker logs reconftw && sleep 10
-      - run: docker logs reconftw && sleep 10
-      - run: docker logs reconftw && sleep 10
+      - run: docker logs reconftw && sleep 3
+      - run: docker logs reconftw && sleep 3
+
+      - run: while true; do docker logs reconftw; sleep 3; done
+
 
       # - name: reconftw -subdomain
       #   run: docker exec reconftw ./reconftw.sh -d $TARGET -s
