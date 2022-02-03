@@ -13,11 +13,11 @@ on:
 
 jobs:
   rec-trigger:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     TARGET: ${{ github.event.inputs.target }}
-  #   steps:
-  #     - run: free -m && df -h .
+    runs-on: ubuntu-latest
+    env:
+      TARGET: ${{ github.event.inputs.target }}
+    steps:
+      - run: free -m && df -h .
 
   #     # - name: getConfig by raw token
   #     # - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
