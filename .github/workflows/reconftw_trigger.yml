@@ -17,6 +17,7 @@ jobs:
     env:
       TARGET: ${{ github.event.inputs.target }}
     steps:
+      - run: echo $TARGET && TARGET=testfire.net 
       - run: free -m && df -h . && ip a
 
   #     # - name: getConfig by raw token
