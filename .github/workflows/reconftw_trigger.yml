@@ -8,7 +8,7 @@ on:
     workflow_dispatch:
       inputs:
           target:
-            required: false
+            required: true
             default: 'testfire.net'
 
 jobs:
@@ -49,7 +49,6 @@ jobs:
         # - run: docker run -t j3ssie/osmedeus:latest scan -t $TARGET 
         - run: docker run -d --name osmedeus j3ssie/osmedeus:latest server
         # - run: docker exec osmedeus osmedeus server
+        - run: docker exec -d osmedeus osmedeus scan -t $TARGET 
         - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb"
-        - run: docker exec -d osmedeus bash -c "cloudflared tunnel --url https://localhost:8000  --no-tls-verify > cf.txt"
-        - run: docker exec osmedeus cat cf.txt
-        - run: docker exec osmedeus osmedeus scan -t $TARGET 
+        - run: docker exec osmedeus bash -c "cloudflared tunnel --url https://localhost:8000  --no-tls-verify > cf.txt"
