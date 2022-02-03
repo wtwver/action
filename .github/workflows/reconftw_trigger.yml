@@ -33,7 +33,8 @@ jobs:
   #     # - run: docker exec reconftw rm ../../.bbrf/config.json
       # - run: docker exec reconftw bash install.sh
   #     # - run: docker exec reconftw sed -i '1686 a curl -T "$SCRIPTPATH/$zip_name" https://f.hoball.tk:81/upload/' reconftw.sh
-      
+      - run: docker exec reconftw go version
+
       - name: reconftw -subdomain
         run: docker exec reconftw ./reconftw.sh -d $TARGET -a
   #     # - name:  reconftw -all
