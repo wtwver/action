@@ -12,7 +12,7 @@ on:
             default: 'testfire.net'
 
 jobs:
-  sub-trigger:
+  osm-trigger:
     runs-on: ubuntu-latest
     env:
       TARGET: ${{ github.event.inputs.target }}
@@ -40,3 +40,10 @@ jobs:
       #   run: docker exec reconftw ./reconftw.sh -d $TARGET -a
 
 
+  rec-trigger:
+      runs-on: ubuntu-latest
+      env:
+        TARGET: ${{ github.event.inputs.target }}
+      steps:
+        - run: free -m && df -h .
+        - run: docker run -t j3ssie/osmedeus:latest scan -t $TARGET 
