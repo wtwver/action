@@ -47,4 +47,4 @@ jobs:
 
       - name: recon all after remove data to prevent bugs
         run: docker exec reconftw rm -rf Recon/$TARGET
-      - run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
+        run: docker exec reconftw ./reconftw.sh -d $TARGET -a    
