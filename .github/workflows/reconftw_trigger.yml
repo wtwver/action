@@ -49,5 +49,5 @@ jobs:
         # - run: wget ${{ secrets.PATH2CONFIG }}/amass.ini?token=GHSAT0AAAAAABIOXCA6IZSJRDWF5NKD2ZLAYQEZ4SA -O amass.ini
 
         - run: docker run -d --name osmedeus j3ssie/osmedeus:latest server
-        - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb cloudflared tunnel --url https://localhost:8000  --no-tls-verify & curl https://localhost:8000 -k || sleep 5 "
+        - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb && cloudflared tunnel --url https://localhost:8000  --no-tls-verify & curl https://localhost:8000 -k || sleep 5 "
         - run: docker exec osmedeus osmedeus scan -t $TARGET 
