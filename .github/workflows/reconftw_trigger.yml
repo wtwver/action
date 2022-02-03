@@ -17,7 +17,7 @@ jobs:
     env:
       TARGET: ${{ github.event.inputs.target }}
     steps:
-      - run: free -m && df -h .
+      - run: free -m && df -h . && ip a
 
   #     # - name: getConfig by raw token
   #     # - run: wget https://raw.githubusercontent.com/wtwver/atm/main/config/reconftw.bbrf?token=AM2642AZ5QKGJWXDYJB4SYTBLAAVY -O reconftw.bbrf
@@ -28,7 +28,7 @@ jobs:
   #       run: docker run -t j3ssie/osmedeus:latest scan -t $TARGET 
 
       - name: start reconftw service
-        run: docker run -m 5g -d --name reconftw --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
+        run: docker run -m 5g -d --name reconftw --entrypoint bash six2dez/reconftw -c "tail -f /dev/null"
   #     #  run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
   #     # - run: docker exec reconftw rm ../../.bbrf/config.json
   #     # - run: docker exec reconftw bash install.sh
@@ -45,9 +45,10 @@ jobs:
         TARGET: ${{ github.event.inputs.target }}
       steps:
         - run: echo $TARGET 
-        - run: free -m && df -h .
+        - run: free -m && df -h . && ip a
         # - run: wget ${{ secrets.PATH2CONFIG }}/amass.ini?token=GHSAT0AAAAAABIOXCA6IZSJRDWF5NKD2ZLAYQEZ4SA -O amass.ini
 
         - run: docker run -d --name osmedeus j3ssie/osmedeus:latest server
         - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb && cloudflared tunnel --url https://localhost:8000  --no-tls-verify & curl https://localhost:8000 -k || sleep 5 "
         - run: docker exec osmedeus osmedeus scan -t $TARGET 
+        - run: docker exec osmedeus tail -f /dev/null
