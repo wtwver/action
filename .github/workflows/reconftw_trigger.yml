@@ -39,9 +39,7 @@ jobs:
   #     # - name:  reconftw -all
   #     #   run: docker exec reconftw ./reconftw.sh -d $TARGET -a
 
-
-
- osm-trigger:
+  osm-trigger:
       runs-on: ubuntu-latest
       env:
         TARGET: ${{ github.event.inputs.target }}
