@@ -49,7 +49,7 @@ jobs:
         - run: free -m && df -h . && ip a
         # - run: wget ${{ secrets.PATH2CONFIG }}/amass.ini?token=GHSAT0AAAAAABIOXCA6IZSJRDWF5NKD2ZLAYQEZ4SA -O amass.ini
 
-        - run: docker run -d --name osmedeus --entrypoint j3ssie/osmedeus:latest bash -c "osmedeus server & wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb && cloudflared tunnel --url https://localhost:8000 --no-tls-verify &"
+        - run: docker run -d --name osmedeus --entrypoint="" j3ssie/osmedeus:latest bash -c "osmedeus server & wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb && cloudflared tunnel --url https://localhost:8000 --no-tls-verify &"
         - run: docker exec -d osmedeus osmedeus scan -t $TARGET
         - run: docker logs osmedeus 
         - run: docker exec osmedeus tail -f /dev/null
