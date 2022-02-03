@@ -12,7 +12,7 @@ on:
             default: 'testfire.net'
 
 jobs:
-  # osm-trigger:
+  rec-trigger:
   #   runs-on: ubuntu-latest
   #   env:
   #     TARGET: ${{ github.event.inputs.target }}
@@ -27,31 +27,29 @@ jobs:
   #     - name: osmedeus -subdomain
   #       run: docker run -t j3ssie/osmedeus:latest scan -t $TARGET 
 
-  #     - name: start reconftw service
-  #       run: docker run -m 5g -d --name reconftw --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
+      - name: start reconftw service
+        run: docker run -m 5g -d --name reconftw --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
   #     #  run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
   #     # - run: docker exec reconftw rm ../../.bbrf/config.json
   #     # - run: docker exec reconftw bash install.sh
   #     # - run: docker exec reconftw sed -i '1686 a curl -T "$SCRIPTPATH/$zip_name" https://f.hoball.tk:81/upload/' reconftw.sh
       
-  #     - name: reconftw -subdomain
-  #       run: docker exec reconftw ./reconftw.sh -d $TARGET -s
+      - name: reconftw -subdomain
+        run: docker exec reconftw ./reconftw.sh -d $TARGET -a
   #     # - name:  reconftw -all
   #     #   run: docker exec reconftw ./reconftw.sh -d $TARGET -a
 
 
 
- rec-trigger:
+ osm-trigger:
       runs-on: ubuntu-latest
       env:
         TARGET: ${{ github.event.inputs.target }}
       steps:
         - run: echo $TARGET 
         - run: free -m && df -h .
-        - run: wget ${{ secrets.PATH2CONFIG }}/amass.ini?token=GHSAT0AAAAAABIOXCA6IZSJRDWF5NKD2ZLAYQEZ4SA -O amass.ini
+        # - run: wget ${{ secrets.PATH2CONFIG }}/amass.ini?token=GHSAT0AAAAAABIOXCA6IZSJRDWF5NKD2ZLAYQEZ4SA -O amass.ini
 
         - run: docker run -d --name osmedeus j3ssie/osmedeus:latest server
+        - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb cloudflared tunnel --url https://localhost:8000  --no-tls-verify & curl https://localhost:8000 -k || sleep 5 "
         - run: docker exec osmedeus osmedeus scan -t $TARGET 
-        - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb"
-        - run: docker exec osmedeus curl https://localhost:8000 -k
-        - run: docker exec osmedeus cloudflared tunnel --url https://localhost:8000  --no-tls-verify
