@@ -12,7 +12,7 @@ on:
             default: 'testfire.net'
 
 jobs:
-  nuclei-scan:
+  sub-resurser:
     runs-on: ubuntu-latest
     env:
       TARGET: ${{ github.event.inputs.target }}
