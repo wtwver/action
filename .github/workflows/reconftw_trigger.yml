@@ -58,5 +58,8 @@ jobs:
         - run: sleep 15
         - run: docker logs osmedeus 
 
-        - run: docker exec osmedeus osmedeus scan -t $TARGET
-        - run: docker exec osmedeus tail -f /dev/null
+        # - run: docker exec osmedeus osmedeus scan -t $TARGET
+        # - run: docker exec osmedeus tail -f /dev/null
+
+        - run: docker exec -d osmedeus osmedeus scan -t $TARGET > o.txt
+        - run: while true; do cat o.txt; docker logs osmedeus ; sleep 60; done
