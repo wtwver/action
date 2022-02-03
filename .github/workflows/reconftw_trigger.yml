@@ -28,15 +28,19 @@ jobs:
   #       run: docker run -t j3ssie/osmedeus:latest scan -t $TARGET 
 
       - name: start reconftw service
-        run: docker run -m 5g -d --name reconftw --entrypoint bash six2dez/reconftw:main -c "tail -f /dev/null"
+        run: docker run -m 5g -d --name reconftw --entrypoint bash six2dez/reconftw:main -c "./reconftw.sh -d $TARGET -s"
   #     #  run: docker run -m 5g -d --name reconftw -v ${PWD}/provider-config.yaml:/root/.config/notify/provider-config.yaml -v ${PWD}/reconftw.bbrf:/root/Tools/reconftw/reconftw.cfg --entrypoint bash wtwver/reconftw -c "tail -f /dev/null"
   #     # - run: docker exec reconftw rm ../../.bbrf/config.json
       # - run: docker exec reconftw bash install.sh
   #     # - run: docker exec reconftw sed -i '1686 a curl -T "$SCRIPTPATH/$zip_name" https://f.hoball.tk:81/upload/' reconftw.sh
-      - run: docker exec reconftw go version
+      # - run: docker exec reconftw go version
 
-      - name: reconftw -subdomain
-        run: docker exec reconftw ./reconftw.sh -d $TARGET -a
+      - run: docker logs reconftw && sleep 10
+      - run: docker logs reconftw && sleep 10
+      - run: docker logs reconftw && sleep 10
+
+      # - name: reconftw -subdomain
+      #   run: docker exec reconftw ./reconftw.sh -d $TARGET -s
   #     # - name:  reconftw -all
   #     #   run: docker exec reconftw ./reconftw.sh -d $TARGET -a
 
