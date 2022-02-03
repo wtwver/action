@@ -52,4 +52,4 @@ jobs:
         - run: docker exec osmedeus bash -c "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && dpkg -i cloudflared-linux-amd64.deb"
         - run: docker exec -d osmedeus cloudflared tunnel --url https://localhost:8000  --no-tls-verify
         - run: docker logs osmedeus
-        - run: docker exec osmedeus scan -t $TARGET 
+        - run: docker exec osmedeus osmedeus scan -t $TARGET 
