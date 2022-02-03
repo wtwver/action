@@ -60,5 +60,5 @@ jobs:
 
         # - run: docker exec osmedeus osmedeus scan -t $TARGET
         - run: docker exec osmedeus tail -f /dev/null
-        - run: sleep 40 && docker logs reconftw 
-        - run: while true; do docker logs reconftw; sleep 60; done
+        - run: sleep 40 && docker logs osmedeus 
+        - run: while true; do docker logs osmedeus; sleep 60; done
